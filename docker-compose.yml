@@ -1,0 +1,14 @@
+services:
+  dev-db:
+    image: postgres:17
+    ports:
+      - 5434:5432
+    environment:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: 123
+       POSTGRES_DB: nest
+    networks:
+      - asia22
+
+networks:
+  asia22:
