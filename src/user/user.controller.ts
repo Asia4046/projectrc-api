@@ -4,18 +4,13 @@ import { Request } from 'express';
 
 @Controller('users')
 export class UserController {
-    @UseGuards(AuthGuard('jwt'))
-    @Get('me')
-    getMe(@Req() req: Request) {
+  @UseGuards(AuthGuard('jwt'))
+  @Get('me')
+  getMe(@Req() req: Request) {
+    console.log({
+      user: req.user,
+    });
 
-        console.log({
-            user: req.user,
-        });
-        
-        return({
-            server: 'NestJS Test Server Running on AWS',
-            version: 'os_prod_linux_1.0.002-alpha',
-            status: 200
-        })
-    }
+    return req.user;
+  }
 }
