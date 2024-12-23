@@ -14,7 +14,7 @@ export class UserController {
         
         return({
             server: 'NestJS Test Server Running on AWS',
-            version: 'os_prod_linux_1.0.001-alpha',
+            version: 'os_prod_linux_1.0.002-alpha',
             status: 200
         })
     }
