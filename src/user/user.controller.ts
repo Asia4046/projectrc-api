@@ -8,12 +8,9 @@ import { JwtGuard } from 'src/auth/guard';
 export class UserController {
   @Get('me')
   getMe(@GetUser() user: User) {
-    /* console.log({
-      user: user,
-    }); */
     return user;
   }
 
   @Patch()
-  editUser(){}
+  editUser() {}
 }
