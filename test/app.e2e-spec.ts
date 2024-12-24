@@ -10,17 +10,17 @@ describe('App e2e', () => {
     }).compile();
 
     app = moduleRef.createNestApplication();
-      app.useGlobalPipes(
-        new ValidationPipe({
-          whitelist: true,
-        }),
-      );
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+      }),
+    );
     await app.init();
   });
 
   afterAll(() => {
     app.close();
-  })
+  });
   it.todo('should pass');
   it.todo('should 1');
 });
