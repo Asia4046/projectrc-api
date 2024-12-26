@@ -44,3 +44,4 @@ model Post {
 
   @@map("posts")
 }
+
