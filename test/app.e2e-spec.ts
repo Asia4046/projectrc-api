@@ -27,6 +27,27 @@ describe('App e2e', () => {
   afterAll(() => {
     app.close();
   });
-  it.todo('should pass');
-  it.todo('should 1');
+  
+  describe('Auth', () => {
+    describe('Signup', () => {})
+
+    describe('Signin', () => {})
+  })
+  describe('User', () => {
+    describe('Get Me', () => {})
+
+    describe('Edit User', () => {})
+  })
+  describe('Posts', () => {
+    describe('Create Posts', () => {})
+
+    describe('Get Posts', () => {})
+
+    describe('Create Posts by Id', () => {})
+
+    describe('Update Posts', () => {})
+
+    describe('Delete Posts', () => {})
+  })
+
 });
