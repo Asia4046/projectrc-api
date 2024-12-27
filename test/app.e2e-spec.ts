@@ -2,6 +2,9 @@ import { Test } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { PrismaService } from '../src/prisma/prisma.service';
+import * as pactum from 'pactum';
+import { todo } from 'node:test';
+import { AuthDto } from 'src/auth/dto';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -18,10 +21,12 @@ describe('App e2e', () => {
       }),
     );
     await app.init();
+    await app.listen(3333);
 
     prisma = app.get(PrismaService);
 
     await prisma.cleanDb(); 
+    pactum.request.setBaseUrl('http://localhost:3333');
   });
 
   afterAll(() => {
@@ -29,9 +34,22 @@ describe('App e2e', () => {
   });
   
   describe('Auth', () => {
-    describe('Signup', () => {})
+    const dto: AuthDto = {
+      email: "test@gmail.com",
+      password: "test",
+      username: "test"
+    }
+    describe('Signup', () => {
+      it('Should Signup', () => {
+        return pactum.spec().post('/auth/signup').withBody(dto).expectStatus(201).inspect();
+      })
+    })
 
-    describe('Signin', () => {})
+    /* describe('Signin', () => {
+      it('Should Signin', () => {
+        return pactum.spec().post('/auth/signup').withBody(dto).expectStatus(200).inspect();
+      })
+    }) */
   })
   describe('User', () => {
     describe('Get Me', () => {})
@@ -48,6 +66,7 @@ describe('App e2e', () => {
     describe('Update Posts', () => {})
 
     describe('Delete Posts', () => {})
+    
   })
 
 });
