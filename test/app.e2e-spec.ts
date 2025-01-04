@@ -40,6 +40,43 @@ describe('App e2e', () => {
       username: 'test',
     };
     describe('Signup', () => {
+      it('Should Throw An Error If Email is Empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody({
+            password: dto.password,
+            username: dto.username,
+          })
+          .expectStatus(400);
+      });
+
+      it('Should Throw An Error If Password is Empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody({
+            email: dto.email,
+            username: dto.username,
+          })
+          .expectStatus(400);
+      });
+
+      it('Should Throw An Error If Username is Empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody({
+            email: dto.email,
+            password: dto.password,
+          })
+          .expectStatus(400);
+      });
+
+      it('Should Throw An Error If No Body is Provided', () => {
+        return pactum.spec().post('/auth/signup').expectStatus(400);
+      });
+
       it('Should Signup', () => {
         return pactum
           .spec()
@@ -51,18 +88,68 @@ describe('App e2e', () => {
     });
 
     describe('Signin', () => {
+      let accessToken: string;
+
       it('Should Signin', () => {
         return pactum
           .spec()
           .post('/auth/signin')
           .withBody(dto)
           .expectStatus(200)
-          .inspect();
+          .stores('userAt', 'access_token');
+      });
+
+      it('Should Throw An Error If Email is Empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody({
+            password: dto.password,
+            username: dto.username,
+          })
+          .expectStatus(400);
+      });
+
+      it('Should Throw An Error If Password is Empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody({
+            email: dto.email,
+            username: dto.username,
+          })
+          .expectStatus(400);
+      });
+
+      it('Should Throw An Error If Username is Empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/signin')
+          .withBody({
+            email: dto.email,
+            password: dto.password,
+          })
+          .expectStatus(400);
+      });
+
+      it('Should Throw An Error If No Body is Provided', () => {
+        return pactum.spec().post('/auth/signin').expectStatus(400);
       });
     });
   });
   describe('User', () => {
-    describe('Get Me', () => {});
+    describe('Get Me', () => {
+      it('Should get current user', () => {
+        return pactum
+          .spec()
+          .get('/users/me')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200);
+        // .inspect();
+      });
+    });
 
     describe('Edit User', () => {});
   });
