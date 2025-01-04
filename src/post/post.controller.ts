@@ -5,10 +5,10 @@ import { PostDto } from './dto';
 
 @Controller('post')
 export class PostController {
-    constructor(private postService: PostService) {}
+  constructor(private postService: PostService) {}
 
-    @Post('upload')
-    upload(dto: PostDto) {
-        return this.postService.upload();
-    }
+  @Post('upload')
+  upload(dto: PostDto) {
+    return this.postService.upload();
+  }
 }
