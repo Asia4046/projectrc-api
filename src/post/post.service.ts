@@ -1,4 +1,15 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PostService {}
+export class PostService {
+
+      getPost() {}
+
+      createPost() {}
+    
+      getPostById() {}
+
+      editPostById() {}
+
+      deletePostById() {}
+}
