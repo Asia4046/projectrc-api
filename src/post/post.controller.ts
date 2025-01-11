@@ -12,7 +12,7 @@ import {
 import { JwtGuard } from '../auth/guard';
 import { PostService } from './post.service';
 import { GetUser } from 'src/auth/decorator';
-import { createPostDto } from './dto';
+import { CreatePostDto } from './dto';
 
 @UseGuards(JwtGuard)
 @Controller('posts')
@@ -23,7 +23,7 @@ export class PostController {
   getPost(@GetUser('id') userId: number) {}
 
   @Post()
-  createPost(@GetUser('id') userId: number, @Body() dto: createPostDto) {}
+  createPost(@GetUser('id') userId: number, @Body() dto: CreatePostDto) {}
 
   @Get(':id')
   getPostById(
