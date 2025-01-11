@@ -12,7 +12,7 @@ import {
 import { JwtGuard } from '../auth/guard';
 import { PostService } from './post.service';
 import { GetUser } from 'src/auth/decorator';
-import { CreatePostDto } from './dto';
+import { CreatePostDto, EditPostDto } from './dto';
 
 @UseGuards(JwtGuard)
 @Controller('posts')
@@ -32,7 +32,7 @@ export class PostController {
   ) {}
 
   @Patch()
-  editPostById(@GetUser('id') userId: number) {}
+  editPostById(@GetUser('id') userId: number, @Body() dto: EditPostDto) {}
 
   @Delete()
   deletePostById(@GetUser('id') userId: number) {}
