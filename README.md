@@ -35,7 +35,8 @@ npm i
 <p>4. Configure ENV variables (.env)</p>
 
 ```
-DATABASE_URL='database url' JWT_SECRET='jwt_secret'
+DATABASE_URL='database url' 
+JWT_SECRET='jwt_secret'
 ```
 
   
