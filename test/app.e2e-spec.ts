@@ -147,19 +147,18 @@ describe('App e2e', () => {
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
-          .expectStatus(200)
-          // .inspect();
+          .expectStatus(200);
+        // .inspect();
       });
     });
 
     describe('Edit User', () => {
-    
       const dto: EditUserDto = {
         email: 'baka@gmail.com',
         firstName: 'esg',
-        lastName: "sd",
-        username: 'assds'
-      }
+        lastName: 'sd',
+        username: 'assds',
+      };
       it('Should edit user', () => {
         return pactum
           .spec()
@@ -168,8 +167,8 @@ describe('App e2e', () => {
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
-          .expectStatus(200)
-          // .inspect();
+          .expectStatus(200);
+        // .inspect();
       });
     });
   });
