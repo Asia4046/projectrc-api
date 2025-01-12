@@ -3,13 +3,11 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { BookmarkModule } from './bookmark/bookmark.module';
 import { PostModule } from './post/post.module';
-import { PostModule } from './post/post.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { HomeController } from './home/home.controller';
 import { PostController } from './post/post.controller';
 import { PostService } from './post/post.service';
-import { PostModule } from './post/post.module';
 
 @Module({
   imports: [

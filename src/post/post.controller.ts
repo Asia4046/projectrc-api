@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { JwtGuard } from '../auth/guard';
 import { PostService } from './post.service';
-import { GetUser } from 'src/auth/decorator';
+import { GetUser } from '../auth/decorator';
 import { CreatePostDto, EditPostDto } from './dto';
 
 @UseGuards(JwtGuard)
@@ -20,20 +20,37 @@ export class PostController {
   constructor(private postService: PostService) {}
 
   @Get()
-  getPost(@GetUser('id') userId: number) {}
+  getPost(@GetUser('id') userId: number) {
+    return this.postService.getPost(userId);
+  }
 
   @Post()
-  createPost(@GetUser('id') userId: number, @Body() dto: CreatePostDto) {}
+  createPost(@GetUser('id') userId: number, @Body() dto: CreatePostDto) {
+    return this.postService.createPost(userId, dto);
+  }
 
   @Get(':id')
   getPostById(
     @GetUser('id') userId: number,
     @Param('id', ParseIntPipe) postId: number,
-  ) {}
+  ) {
+    return this.postService.getPostById(userId, postId);
+  }
 
-  @Patch()
-  editPostById(@GetUser('id') userId: number, @Body() dto: EditPostDto) {}
+  @Patch(':id')
+  editPostById(
+    @GetUser('id') userId: number,
+    @Body() dto: EditPostDto,
+    @Param('id', ParseIntPipe) postId: number,
+  ) {
+    return this.postService.editPostById(userId, dto, postId);
+  }
 
-  @Delete()
-  deletePostById(@GetUser('id') userId: number) {}
+  @Delete(':id')
+  deletePostById(
+    @GetUser('id') userId: number,
+    @Param('id', ParseIntPipe) postId: number,
+  ) {
+    return this.postService.deletePostById(userId, postId);
+  }
 }
