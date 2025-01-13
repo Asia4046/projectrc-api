@@ -6,7 +6,7 @@ import * as pactum from 'pactum';
 import { todo } from 'node:test';
 import { AuthDto } from 'src/auth/dto';
 import { EditUserDto } from 'src/user/dto';
-import { CreatePostDto } from 'src/post/dto';
+import { CreatePostDto, EditPostDto } from 'src/post/dto';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -176,7 +176,6 @@ describe('App e2e', () => {
     });
   });
   describe('Posts', () => {
-
     describe('Get Empty Posts', () => {
       it('Should get posts', () => {
         return pactum
@@ -191,34 +190,102 @@ describe('App e2e', () => {
     });
 
     describe('Create Posts', () => {
-
       const dto: CreatePostDto = {
         title: 'New',
         link: 'jjj',
         subject: 'test',
         description: 'none',
         grade: 'X',
-      }
+      };
 
-      it("Should Create Post", () => {
+      it('Should Create Post', () => {
         return pactum
-        .spec()
-        .post('/posts')
-        .withHeaders({
-          Authorization: 'Bearer $S{userAt}',
-        })
-        .withBody(dto)
-        .expectStatus(201)
-        .inspect();
-      })
+          .spec()
+          .post('/posts')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .withBody(dto)
+          .expectStatus(201)
+          .stores('postId', 'id');
+      });
     });
 
-    describe('Get Posts', () => {});
+    describe('Get Posts', () => {
+      it('Should get posts', () => {
+        return pactum
+          .spec()
+          .get('/posts')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200)
+          .expectJsonLength(1);
+      });
+    });
 
-    describe('Create Posts by Id', () => {});
+    describe('Create Posts by Id', () => {
+      it('Should get post by id', () => {
+        return pactum
+          .spec()
+          .get('/posts/{id}')
+          .withPathParams('id', '$S{postId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200)
+          .expectBodyContains('$S{postId}');
+      });
+    });
 
-    describe('Update Posts', () => {});
+    describe('Update Posts', () => {
+      const dto: EditPostDto = {
+        title: 'baka',
+        subject: 'baka',
+      };
 
-    describe('Delete Posts', () => {});
+      it('Should update post by id', () => {
+        return pactum
+          .spec()
+          .patch('/posts/{id}')
+          .withPathParams('id', '$S{postId}')
+          .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200)
+          .expectBodyContains(dto.title)
+          .expectBodyContains(dto.subject)
+          .inspect();
+      });
+    });
+
+    describe('Delete Posts', () => {
+      it('Should delete post by id', () => {
+        return pactum
+          .spec()
+          .delete('/posts/{id}')
+          .withPathParams('id', '$S{postId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(204)
+          .inspect();
+      });
+    });
+
+    describe('Get Empty Posts', () => {
+      it('Should get posts', () => {
+        return pactum
+          .spec()
+          .get('/posts')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200)
+          .expectJsonLength(0);
+      });
+    });
+
   });
 });

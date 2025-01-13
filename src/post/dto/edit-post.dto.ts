@@ -19,5 +19,5 @@ export class EditPostDto {
 
   @IsOptional()
   @IsString()
-  grade?: string
+  grade?: string;
 }
