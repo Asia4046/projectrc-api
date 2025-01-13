@@ -1,5 +1,9 @@
 FROM node:21
 
+ARG USERNAME=a22
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
 WORKDIR /usr/src/projrc
 
 COPY . .
