@@ -1,0 +1,9 @@
+dist
+.vscode
+.gitignore
+.git 
+README.md
+yarn.lock
+LICENCE
+.prittierrc
+.eslintrc.js
