@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class EditPostDto {
   @IsString()
@@ -19,5 +19,5 @@ export class EditPostDto {
 
   @IsOptional()
   @IsString()
-  grade?: string
+  grade?: string;
 }

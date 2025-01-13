@@ -19,5 +19,5 @@ export class CreatePostDto {
 
   @IsNotEmpty()
   @IsString()
-  grade: string
+  grade: string;
 }
