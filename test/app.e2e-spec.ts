@@ -3,7 +3,6 @@ import { AppModule } from '../src/app.module';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { PrismaService } from '../src/prisma/prisma.service';
 import * as pactum from 'pactum';
-import { todo } from 'node:test';
 import { AuthDto } from 'src/auth/dto';
 import { EditUserDto } from 'src/user/dto';
 import { CreatePostDto, EditPostDto } from 'src/post/dto';
@@ -90,8 +89,6 @@ describe('App e2e', () => {
     });
 
     describe('Signin', () => {
-      let accessToken: string;
-
       it('Should Signin', () => {
         return pactum
           .spec()
@@ -286,6 +283,5 @@ describe('App e2e', () => {
           .expectJsonLength(0);
       });
     });
-
   });
 });
