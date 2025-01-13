@@ -6,6 +6,7 @@ import * as pactum from 'pactum';
 import { todo } from 'node:test';
 import { AuthDto } from 'src/auth/dto';
 import { EditUserDto } from 'src/user/dto';
+import { CreatePostDto } from 'src/post/dto';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -167,13 +168,50 @@ describe('App e2e', () => {
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
+          .expectBodyContains(dto.email)
+          .expectBodyContains(dto.username)
           .expectStatus(200);
         // .inspect();
       });
     });
   });
   describe('Posts', () => {
-    describe('Create Posts', () => {});
+
+    describe('Get Empty Posts', () => {
+      it('Should get posts', () => {
+        return pactum
+          .spec()
+          .get('/posts')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200)
+          .expectBody([]);
+      });
+    });
+
+    describe('Create Posts', () => {
+
+      const dto: CreatePostDto = {
+        title: 'New',
+        link: 'jjj',
+        subject: 'test',
+        description: 'none',
+        grade: 'X',
+      }
+
+      it("Should Create Post", () => {
+        return pactum
+        .spec()
+        .post('/posts')
+        .withHeaders({
+          Authorization: 'Bearer $S{userAt}',
+        })
+        .withBody(dto)
+        .expectStatus(201)
+        .inspect();
+      })
+    });
 
     describe('Get Posts', () => {});
 

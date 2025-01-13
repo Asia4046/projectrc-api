@@ -38,7 +38,8 @@ model Post {
   title String @unique
   description String?
   link String @unique
-  subject String
+  subject String?
+  grade String
 
   userId Int
   user User @relation(fields: [userId], references: [id])
