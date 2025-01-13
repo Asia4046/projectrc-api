@@ -20,6 +20,9 @@ CREATE TABLE "posts" (
     "title" TEXT NOT NULL,
     "description" TEXT,
     "link" TEXT NOT NULL,
+    "subject" TEXT NOT NULL,
+    "grade" TEXT NOT NULL,
+    "IsAdmin" BOOLEAN NOT NULL,
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "posts_pkey" PRIMARY KEY ("id")

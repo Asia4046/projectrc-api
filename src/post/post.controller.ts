@@ -20,8 +20,8 @@ export class PostController {
   constructor(private postService: PostService) {}
 
   @Get()
-  getPost(@GetUser('id') userId: number) {
-    return this.postService.getPost(userId);
+  getPosts(@GetUser('id') userId: number) {
+    return this.postService.getPosts(userId);
   }
 
   @Post()
