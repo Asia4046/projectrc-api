@@ -1,12 +1,12 @@
 FROM node:21
 
-RUN useradd -u 8877 dev
+RUN useradd -u 8877 10000 
 
 RUN sudo groupadd docker
 
-RUN sudo usermod -aG docker dev
+RUN sudo usermod -aG docker 10000 
 
-USER dev
+USER 10000 
 
 WORKDIR /usr/src/projrc
 
