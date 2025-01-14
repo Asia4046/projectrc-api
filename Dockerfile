@@ -8,7 +8,7 @@ RUN usermod -aG docker 10000
 
 USER 10000 
 
-WORKDIR /home/10000/projrc
+WORKDIR /usr/src/projrc
 
 COPY . .
 
