@@ -1,8 +1,14 @@
 FROM node:21
 
-USER 10014
+RUN useradd -u 8877 dev
 
-WORKDIR /home/10014/projrc
+RUN sudo groupadd docker
+
+RUN sudo usermod -aG docker dev
+
+USER dev
+
+WORKDIR /usr/src/projrc
 
 COPY . .
 
