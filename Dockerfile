@@ -1,7 +1,5 @@
 FROM node:21
 
-USER 10014
-
 WORKDIR /usr/src/projrc
 
 COPY . .
