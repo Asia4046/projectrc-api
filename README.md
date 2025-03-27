@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/Asia4046/projectrc-api/image?font=Raleway&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit+Board&amp;pulls=1&amp;stargazers=1&amp;theme=Auto" alt="project-image"></p>
 
-<p id="description">The Open Source Implementation Of the API that I use for the open resource collection project.</p>
+<p id="description">The Open Source Implementation Of the API that I use for the resource collection project.</p>
 
   
   
